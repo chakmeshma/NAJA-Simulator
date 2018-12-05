@@ -1,10 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class OuterDoorInteraction : MonoBehaviour , IInteraction {
+public enum Door
+{
+    FrontLeft,
+    FrontRight,
+    BackLeft,
+    BackRight
+}
+
+
+public class OuterDoorInteraction : MonoBehaviour, IInteraction
+{
     private static string description = "نشستن در ماشين";
-    private static bool running = false;
+    private bool running = false;
+    public Door door;
+    public OuterDoorInteraction referedInstance = null;
+    private OuterDoorInteraction instance;
+
+
+    void Awake()
+    {
+        if (referedInstance)
+        {
+            instance = referedInstance;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     private void disableResetPlayerMovement()
     {
@@ -22,22 +46,39 @@ public class OuterDoorInteraction : MonoBehaviour , IInteraction {
 
     public void run()
     {
-        running = true;
+        instance.running = true;
 
-        disableResetPlayerMovement();
+        instance.disableResetPlayerMovement();
 
         ReferencesAndValues.instance.outerCar.SetActive(false);
         ReferencesAndValues.instance.innerCar.SetActive(true);
 
         ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerInsideCarRotation);
-        ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerInsideCarPosition;
 
-        running = false;
+
+        switch (instance.door)
+        {
+            case Door.FrontLeft:
+                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerInsideCarPositionFrontLeft;
+                break;
+            case Door.FrontRight:
+                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerInsideCarPositionFrontRight;
+                break;
+            case Door.BackLeft:
+                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerInsideCarPositionBackLeft;
+                break;
+            case Door.BackRight:
+                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerInsideCarPositionBackRight;
+                break;
+        }
+
+
+        instance.running = false;
     }
 
     public bool isRunning()
     {
-        return running;
+        return instance.running;
     }
 
     public string getDescription()

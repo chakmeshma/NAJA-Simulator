@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DashboardInteraction : MonoBehaviour, IInteraction
@@ -31,7 +30,7 @@ public class DashboardInteraction : MonoBehaviour, IInteraction
     {
         float progress = 0.0f;
 
-        while(progress < 1.0f)
+        while (progress < 1.0f)
         {
             progress += 0.01f;
 
