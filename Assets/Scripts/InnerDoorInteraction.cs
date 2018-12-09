@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
-public class InnerDoorInteraction : MonoBehaviour, IInteraction
+public class InnerDoorInteraction : Interaction
 {
     private static string description = "خارج شدن از ماشين";
     private bool running = false;
-    public Door door;
-    public InnerDoorInteraction referedInstance = null;
+    [SerializeField]
+    private Door door;
+    [SerializeField]
+    private InnerDoorInteraction referedInstance = null;
     private InnerDoorInteraction instance;
 
 
@@ -28,17 +30,16 @@ public class InnerDoorInteraction : MonoBehaviour, IInteraction
         ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().stopping = false;
     }
 
-    public bool isInputBlocking()
+    public override bool isInputBlocking()
     {
         return true;
     }
 
-    public void run()
+    public override void execute()
     {
         instance.running = true;
 
-        ReferencesAndValues.instance.outerCar.SetActive(true);
-        ReferencesAndValues.instance.innerCar.SetActive(false);
+        Loader.instance.switchOutdoor();
 
         ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerOutsideCarRotation);
         switch (instance.door)
@@ -63,12 +64,12 @@ public class InnerDoorInteraction : MonoBehaviour, IInteraction
         instance.running = false;
     }
 
-    public bool isRunning()
+    public override bool isRunning()
     {
         return instance.running;
     }
 
-    public string getDescription()
+    public override string getDescription()
     {
         return description;
     }

@@ -8,13 +8,14 @@ public enum Door
     BackRight
 }
 
-
-public class OuterDoorInteraction : MonoBehaviour, IInteraction
+public class OuterDoorInteraction : Interaction
 {
     private static string description = "نشستن در ماشين";
     private bool running = false;
-    public Door door;
-    public OuterDoorInteraction referedInstance = null;
+    [SerializeField]
+    private Door door;
+    [SerializeField]
+    private OuterDoorInteraction referedInstance = null;
     private OuterDoorInteraction instance;
 
 
@@ -39,19 +40,18 @@ public class OuterDoorInteraction : MonoBehaviour, IInteraction
         Camera.main.transform.localPosition = new Vector3(0.0f, cameraLocalPosition.y, cameraLocalPosition.z);
     }
 
-    public bool isInputBlocking()
+    public override bool isInputBlocking()
     {
         return true;
     }
 
-    public void run()
+    public override void execute()
     {
         instance.running = true;
 
         instance.disableResetPlayerMovement();
 
-        ReferencesAndValues.instance.outerCar.SetActive(false);
-        ReferencesAndValues.instance.innerCar.SetActive(true);
+        Loader.instance.switchIndoor();
 
         ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerInsideCarRotation);
 
@@ -76,12 +76,12 @@ public class OuterDoorInteraction : MonoBehaviour, IInteraction
         instance.running = false;
     }
 
-    public bool isRunning()
+    public override bool isRunning()
     {
         return instance.running;
     }
 
-    public string getDescription()
+    public override string getDescription()
     {
         return description;
     }

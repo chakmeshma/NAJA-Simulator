@@ -17,6 +17,7 @@ public class ReferencesAndValues : MonoBehaviour {
     public Vector3 playerOutsideCarRotation;
     public GameObject outerCar;
     public GameObject innerCar;
+    public Cursor cursorController;
 
     private void Awake()
     {

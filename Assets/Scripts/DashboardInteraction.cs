@@ -1,54 +1,25 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class DashboardInteraction : MonoBehaviour, IInteraction
+﻿public class DashboardInteraction : KeyshapeInteraction
 {
-    public AnimationCurve animationCurve;
-    private static string description = "باز کردن داشبورد";
-    private bool running = false;
-    private SkinnedMeshRenderer meshRenderer;
-
-    void Awake()
+    public enum State
     {
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+        Opened,
+        Closed
     }
 
-    public bool isInputBlocking()
+    private State state = State.Closed;
+
+    private static string description = "باز کردن";
+    private static string reverseDescription = "بستن";
+
+    public override void execute()
     {
-        return false;
+        base.execute(state == State.Opened);
+
+        state = (state == State.Closed) ? (State.Opened) : (State.Closed);
     }
 
-    public void run()
+    public override string getDescription()
     {
-        running = true;
-
-        StopAllCoroutines();
-        StartCoroutine("openDashboard");
-    }
-
-    private IEnumerator openDashboard()
-    {
-        float progress = 0.0f;
-
-        while (progress < 1.0f)
-        {
-            progress += 0.01f;
-
-            meshRenderer.SetBlendShapeWeight(0, 100.0f * animationCurve.Evaluate(progress));
-
-            yield return new WaitForSeconds(0.0166f);
-        }
-
-        running = false;
-    }
-
-    public bool isRunning()
-    {
-        return running;
-    }
-
-    public string getDescription()
-    {
-        return description;
+        return (state == State.Closed) ? (description) : (reverseDescription);
     }
 }

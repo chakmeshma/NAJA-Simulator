@@ -4,7 +4,7 @@ public class GameController : MonoBehaviour
 {
     public Cursor cursorController;
     private bool lastSelectedState = false; // breaks when camera is initially positioned so, that the item is selected
-    private IInteraction lastInputBlockingInteraction = null;
+    private Interaction lastInputBlockingInteraction = null;
     public UnityEngine.UI.Text inputHelpText;
     public KeyCode[] keyCodes;
 
@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
         if (lastInputBlockingInteraction == null || !lastInputBlockingInteraction.isRunning())
         {
             bool currentSelectedState;
-            IInteraction[] interactions = getInteractions();
+            Interaction[] interactions = getInteractions();
 
             currentSelectedState = (interactions != null);
 
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
                 {
                     if (interactions != null && i < interactions.Length)
                     {
-                        interactions[i].run();
+                        interactions[i].execute();
 
                         if (interactions[i].isInputBlocking())
                         {
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void updateInputGUI(IInteraction[] interactions)
+    private void updateInputGUI(Interaction[] interactions)
     {
         if (interactions == null)
         {
@@ -73,13 +73,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private IInteraction[] getInteractions()
+    private Interaction[] getInteractions()
     {
         RaycastHit raycastHit;
 
         if (Physics.Raycast(transform.position, transform.forward, out raycastHit, 1.3f, LayerMask.GetMask("Interactable")))
         {
-            IInteraction[] interactions = raycastHit.transform.GetComponents<IInteraction>();
+            Interaction[] interactions = raycastHit.transform.GetComponents<Interaction>();
 
             return (interactions.Length > 0) ? (interactions) : (null);
         }

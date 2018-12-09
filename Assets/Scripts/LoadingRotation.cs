@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplashTimer : MonoBehaviour {
+public class LoadingRotation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,7 +11,6 @@ public class SplashTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.timeSinceLevelLoad > 3.0f)
-            Application.LoadLevel("main");
+        transform.Rotate(0.0f, 0.0f, -150.0f * Time.deltaTime);
 	}
 }
