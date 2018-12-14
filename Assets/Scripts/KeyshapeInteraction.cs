@@ -9,7 +9,7 @@ public abstract class KeyshapeInteraction : Interaction
     private AnimationCurve animationCurve;
     [SerializeField]
     private AnimationCurve reverseAnimationCurve;
-    private bool running = false;
+    
     private SkinnedMeshRenderer meshRenderer;
 
     void Awake()
@@ -70,10 +70,6 @@ public abstract class KeyshapeInteraction : Interaction
         running = false;
     }
 
-    public override bool isRunning()
-    {
-        return running;
-    }
 
     public abstract override string getDescription();
 }

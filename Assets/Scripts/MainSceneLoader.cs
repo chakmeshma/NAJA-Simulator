@@ -26,11 +26,11 @@ public class MainSceneLoader : MonoBehaviour {
             splashLogo.SetActive(false);
             loadingGraphics.SetActive(true);
 
-            StartCoroutine(LoadMainScene());
+            StartCoroutine(loadMainScene());
         }
 	}
 
-    IEnumerator LoadMainScene()
+    IEnumerator loadMainScene()
     {
         AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("main");
 

@@ -26,7 +26,14 @@ public class GameController : MonoBehaviour
                 {
                     if (interactions != null && i < interactions.Length)
                     {
-                        interactions[i].execute();
+                        try
+                        {
+                            interactions[i].execute();
+                        } catch (System.Exception e)
+                        {
+                            int sdf;
+                            sdf = 3245;
+                        }
 
                         if (interactions[i].isInputBlocking())
                         {

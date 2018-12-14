@@ -1,33 +1,23 @@
 ﻿using UnityEngine;
 
-public class InnerDoorInteraction : Interaction
+public class InnerDoorInteraction : ReferencingInteraction
 {
     private static string description = "خارج شدن از ماشين";
-    private bool running = false;
+
     [SerializeField]
     private Door door;
-    [SerializeField]
-    private InnerDoorInteraction referedInstance = null;
-    private InnerDoorInteraction instance;
-
-
-    void Awake()
-    {
-        if (referedInstance)
-        {
-            instance = referedInstance;
-        }
-        else
-        {
-            instance = this;
-        }
-    }
 
 
     private void enableResetPlayerMovement()
     {
-        ReferencesAndValues.instance.player.GetComponent<CharacterController>().enabled = true;
-        ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().stopping = false;
+        if (instance == this)
+        {
+
+            ReferencesAndValues.instance.player.GetComponent<CharacterController>().enabled = true;
+            ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().stopping = false;
+        }
+        else
+            (instance as InnerDoorInteraction).enableResetPlayerMovement();
     }
 
     public override bool isInputBlocking()
@@ -37,36 +27,41 @@ public class InnerDoorInteraction : Interaction
 
     public override void execute()
     {
-        instance.running = true;
-
-        Loader.instance.switchOutdoor();
-
-        ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerOutsideCarRotation);
-        switch (instance.door)
+        if (instance == this)
         {
-            case Door.FrontLeft:
-                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarPositionFrontLeft;
-                break;
-            case Door.FrontRight:
-                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarPositionFrontRight;
-                break;
-            case Door.BackLeft:
-                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarPositionBackLeft;
-                break;
-            case Door.BackRight:
-                ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarPositionBackRight;
-                break;
+            running = true;
+
+            Loader.instance.switchOutdoor();
+
+            switch (door)
+            {
+                case Door.FrontLeft:
+                    ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarFrontLeft.position;
+                    ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerOutsideCarFrontLeft.rotation.eulerAngles);
+                    break;
+                case Door.FrontRight:
+                    ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarFrontRight.position;
+                    ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerOutsideCarFrontRight.rotation.eulerAngles);
+                    break;
+                case Door.BackLeft:
+                    ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerOutsideCarBackLeft.rotation.eulerAngles);
+                    ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarBackLeft.position;
+                    break;
+                case Door.BackRight:
+                    ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().ForceRotateView(ReferencesAndValues.instance.playerOutsideCarBackRight.rotation.eulerAngles);
+                    ReferencesAndValues.instance.player.transform.position = ReferencesAndValues.instance.playerOutsideCarBackRight.position;
+                    break;
+            }
+
+
+            enableResetPlayerMovement();
+
+            running = false;
         }
-
-
-        instance.enableResetPlayerMovement();
-
-        instance.running = false;
-    }
-
-    public override bool isRunning()
-    {
-        return instance.running;
+        else
+        {
+            instance.execute();
+        }
     }
 
     public override string getDescription()

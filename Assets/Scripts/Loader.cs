@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Loader : MonoBehaviour
 {
@@ -7,10 +8,10 @@ public class Loader : MonoBehaviour
     private int progress = 0;
     private Interaction[] innerCarInteractionScripts;
     private Renderer[] innerCarRenderers;
-    private Collider[] innerCarColliders;
+    private List<Collider> innerCarColliders;
     private Interaction[] outerCarInteractionScripts;
     private Renderer[] outerCarRenderers;
-    private Collider[] outerCarColliders;
+    private List<Collider> outerCarColliders;
 
     void Awake()
     {
@@ -18,11 +19,17 @@ public class Loader : MonoBehaviour
 
         innerCarInteractionScripts = ReferencesAndValues.instance.innerCar.GetComponentsInChildren<Interaction>();
         innerCarRenderers = ReferencesAndValues.instance.innerCar.GetComponentsInChildren<Renderer>();
-        innerCarColliders = ReferencesAndValues.instance.innerCar.GetComponentsInChildren<MeshCollider>();
+        innerCarColliders = new List<Collider>(ReferencesAndValues.instance.innerCar.GetComponentsInChildren<Collider>());
+
+        innerCarColliders.RemoveAll(item => item.tag != "Interactable");
+
+        foreach (Collider i in innerCarColliders)
 
         outerCarInteractionScripts = ReferencesAndValues.instance.outerCar.GetComponentsInChildren<Interaction>();
         outerCarRenderers = ReferencesAndValues.instance.outerCar.GetComponentsInChildren<Renderer>();
-        outerCarColliders = ReferencesAndValues.instance.outerCar.GetComponentsInChildren<MeshCollider>();
+        outerCarColliders = new List<Collider>(ReferencesAndValues.instance.outerCar.GetComponentsInChildren<Collider>());
+
+        outerCarColliders.RemoveAll(item => item.tag != "Interactable");
     }
 
     void applyInitialState()
@@ -38,7 +45,13 @@ public class Loader : MonoBehaviour
     {
         applyInitialState();
 
-        Destroy(GameObject.Find("Splash Canvas").gameObject);
+        try
+        {
+            Destroy(GameObject.Find("Splash Canvas").gameObject);
+        } catch(System.NullReferenceException e)
+        {
+
+        }
     }
 
     public void switchIndoor()
