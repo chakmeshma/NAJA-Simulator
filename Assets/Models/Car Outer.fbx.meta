@@ -205,6 +205,11 @@ ModelImporter:
     100398: Cube.089_Cube.000
     100400: Cube.091_Cube.000
     100402: Cube.101_Cube.000
+    100404: Armature
+    100406: Bone
+    100408: Bone_end
+    100410: Trunk
+    100412: Trunk Armature
     400000: //RootNode
     400002: Circle.000_Circle.003
     400004: Circle.001_Circle.002
@@ -407,6 +412,11 @@ ModelImporter:
     400398: Cube.089_Cube.000
     400400: Cube.091_Cube.000
     400402: Cube.101_Cube.000
+    400404: Armature
+    400406: Bone
+    400408: Bone_end
+    400410: Trunk
+    400412: Trunk Armature
     2100000: car
     2100002: Material.001
     2100004: in.t.w
@@ -433,6 +443,32 @@ ModelImporter:
     2100046: Material.003
     2100048: C.B
     2100050: miror
+    2100052: car.001
+    2100054: gg.001
+    2100056: nikl.001
+    2100058: loha.001
+    2100060: Material.015
+    2100062: bk.001
+    2100064: nikel.red.001
+    2100066: in.t.w.001
+    2100068: nikl.bk.001
+    2100070: Material.017
+    2100072: Material.012
+    2100074: in.t.b.001
+    2100076: Material.014
+    2100078: Material.020
+    2100080: Material.013
+    2100082: Siges_centre.000
+    2100084: Intrieur_&_siges.000
+    2100086: Material.022
+    2100088: Material.011
+    2100090: Material.018
+    2100092: Material.019
+    2100094: Material.021
+    2100096: miror.001
+    2100098: C.B.001
+    2100100: edeter.000
+    2100102: edater.001
     2300000: Circle.000_Circle.003
     2300002: Circle.001_Circle.002
     2300004: Circle.002_Circle.004
@@ -1034,9 +1070,13 @@ ModelImporter:
     4300396: Cube.006_Cube.000
     4300398: Cube.101_Cube.000
     4300400: Cube.089_Cube.000
+    4300402: Trunk
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Dashboard
     13700002: Cube.007_Cube.020
+    13700004: Trunk
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -1187,7 +1227,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -1240,7 +1280,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
