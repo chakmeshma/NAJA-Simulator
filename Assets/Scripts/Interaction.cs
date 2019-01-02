@@ -3,7 +3,7 @@
     protected bool _interactable = true;
     protected bool running = false;
 
-    protected virtual bool interactable
+    public bool interactable
     {
         get
         {

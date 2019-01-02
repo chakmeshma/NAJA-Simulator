@@ -26,21 +26,37 @@ public class GameController : MonoBehaviour
                 {
                     if (interactions != null && i < interactions.Length)
                     {
-                        try
+                        if (interactions[i].interactable)
                         {
-                            interactions[i].execute();
-                        } catch (System.Exception e)
-                        {
-                            e.GetType();
-                        }
+                            try
+                            {
+                                interactions[i].execute();
 
-                        if (interactions[i].isInputBlocking())
-                        {
-                            lastInputBlockingInteraction = interactions[i];
-                        }
-                        else
-                        {
-                            lastInputBlockingInteraction = null;
+                                if (interactions[i] is OpenDoorInteraction)
+                                {
+                                    if ((interactions[i] as OpenDoorInteraction).state == OpenDoorInteraction.State.Opened)
+                                    {
+                                        interactions[i].gameObject.GetComponent<DoorHullRemoveInteraction>().interactable = true;
+                                    }
+                                    else
+                                    {
+                                        interactions[i].gameObject.GetComponent<DoorHullRemoveInteraction>().interactable = false;
+                                    }
+                                }
+                            }
+                            catch (System.Exception e)
+                            {
+                                e.GetType();
+                            }
+
+                            if (interactions[i].isInputBlocking())
+                            {
+                                lastInputBlockingInteraction = interactions[i];
+                            }
+                            else
+                            {
+                                lastInputBlockingInteraction = null;
+                            }
                         }
                     }
 
@@ -67,12 +83,15 @@ public class GameController : MonoBehaviour
 
             for (int i = 0; i < interactions.Length; i++)
             {
-                if (i > 0)
+                if (interactions[i].interactable)
                 {
-                    inputHelpString += "\n";
-                }
+                    if (i > 0)
+                    {
+                        inputHelpString += "\n";
+                    }
 
-                inputHelpString += "برای " + interactions[i].getDescription() + " دکمه ی " + keyCodes[i] + " را بفشاريد.";
+                    inputHelpString += "برای " + interactions[i].getDescription() + " دکمه ی " + keyCodes[i] + " را بفشاريد.";
+                }
             }
 
             inputHelpText.text = ArabicSupport.ArabicFixer.Fix(inputHelpString);
