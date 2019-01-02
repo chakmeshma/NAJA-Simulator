@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class InspectDoorInteraction : ReferencingInteraction
+public class InspectDoorInteraction : Interaction
 {
     private static string description = "بررسی در";
     [SerializeField]
@@ -12,41 +12,29 @@ public class InspectDoorInteraction : ReferencingInteraction
     private AudioClip suspiciousSound;
     private AudioSource audioSource;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
-        if (instance == this)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void execute()
     {
-        if (instance == this)
+
+        if (suspicious)
         {
-
-            if (suspicious)
-            {
-                audioSource.clip = suspiciousSound;
-            }
-            else
-            {
-                audioSource.clip = normalSound;
-            }
-
-            running = true;
-
-            audioSource.Play();
-
-            StopAllCoroutines();
-            StartCoroutine(soundPlayRunning());
+            audioSource.clip = suspiciousSound;
         }
         else
         {
-            instance.execute();
+            audioSource.clip = normalSound;
         }
+
+        running = true;
+
+        audioSource.Play();
+
+        StopAllCoroutines();
+        StartCoroutine(soundPlayRunning());
     }
 
     private IEnumerator soundPlayRunning()

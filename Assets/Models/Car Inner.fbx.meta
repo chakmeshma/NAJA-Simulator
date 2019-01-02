@@ -208,6 +208,10 @@ ModelImporter:
     100404: Cube.007_Cube.000
     100406: Cube.101_Cube.000
     100408: Cube.118_Cube.000
+    100410: Back Right Inner Door
+    100412: Back Right Inner Door.001
+    100414: Front Left Inner Door
+    100416: Front Right Inner Door
     400000: //RootNode
     400002: Circle.000_Circle.003
     400004: Circle.001_Circle.002
@@ -413,6 +417,10 @@ ModelImporter:
     400404: Cube.007_Cube.000
     400406: Cube.101_Cube.000
     400408: Cube.118_Cube.000
+    400410: Back Right Inner Door
+    400412: Back Right Inner Door.001
+    400414: Front Left Inner Door
+    400416: Front Right Inner Door
     2100000: gg
     2100002: car
     2100004: in.t.w
@@ -668,6 +676,10 @@ ModelImporter:
     2300400: Cube.007_Cube.000
     2300402: Cube.101_Cube.000
     2300404: Cube.118_Cube.000
+    2300406: Back Right Inner Door
+    2300408: Back Right Inner Door.001
+    2300410: Front Left Inner Door
+    2300412: Front Right Inner Door
     3300000: Circle.000_Circle.003
     3300002: Circle.001_Circle.002
     3300004: Circle.002_Circle.004
@@ -871,6 +883,10 @@ ModelImporter:
     3300400: Cube.007_Cube.000
     3300402: Cube.101_Cube.000
     3300404: Cube.118_Cube.000
+    3300406: Back Right Inner Door
+    3300408: Back Right Inner Door.001
+    3300410: Front Left Inner Door
+    3300412: Front Right Inner Door
     4300000: Cube.198_Cube.258
     4300002: Cube.104_Cube.135
     4300004: Cube.132_Cube.171
@@ -1075,6 +1091,10 @@ ModelImporter:
     4300402: Cube.101_Cube.000
     4300404: Cube.005_Cube.000
     4300406: Cube.118_Cube.000
+    4300408: Front Left Inner Door
+    4300410: Back Right Inner Door
+    4300412: Front Right Inner Door
+    4300414: Back Right Inner Door.001
     9500000: //RootNode
     13700000: Dashboard
     13700002: Cube.007_Cube.020

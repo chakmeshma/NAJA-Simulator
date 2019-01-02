@@ -31,8 +31,7 @@ public class GameController : MonoBehaviour
                             interactions[i].execute();
                         } catch (System.Exception e)
                         {
-                            int sdf;
-                            sdf = 3245;
+                            e.GetType();
                         }
 
                         if (interactions[i].isInputBlocking())

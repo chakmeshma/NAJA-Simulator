@@ -210,6 +210,32 @@ ModelImporter:
     100408: Bone_end
     100410: Trunk
     100412: Trunk Armature
+    100414: Bone 1
+    100416: Bone_end 1
+    100418: Cube.201_Cube.000
+    100420: Back Left Armature
+    100422: Back Left Door
+    100424: Back Left Door Inside
+    100426: Back Right Armature
+    100428: Back Right Door
+    100430: Back Right Door Inside
+    100432: Bone 2
+    100434: Bone 3
+    100436: Bone 4
+    100438: Bone_end 2
+    100440: Bone_end 3
+    100442: Bone_end 4
+    100444: Front Left Armature
+    100446: Front Left Door
+    100448: Front Left Door Inside
+    100450: Front Right Armature
+    100452: Front Right Door
+    100454: Front Right Door Inside
+    100456: Bone_end_end
+    100458: Bone_end_end 1
+    100460: Bone_end_end 2
+    100462: Bone_end_end 3
+    100464: Bone_end_end 4
     400000: //RootNode
     400002: Circle.000_Circle.003
     400004: Circle.001_Circle.002
@@ -417,6 +443,32 @@ ModelImporter:
     400408: Bone_end
     400410: Trunk
     400412: Trunk Armature
+    400414: Bone 1
+    400416: Bone_end 1
+    400418: Cube.201_Cube.000
+    400420: Back Left Armature
+    400422: Back Left Door
+    400424: Back Left Door Inside
+    400426: Back Right Armature
+    400428: Back Right Door
+    400430: Back Right Door Inside
+    400432: Bone 2
+    400434: Bone 3
+    400436: Bone 4
+    400438: Bone_end 2
+    400440: Bone_end 3
+    400442: Bone_end 4
+    400444: Front Left Armature
+    400446: Front Left Door
+    400448: Front Left Door Inside
+    400450: Front Right Armature
+    400452: Front Right Door
+    400454: Front Right Door Inside
+    400456: Bone_end_end
+    400458: Bone_end_end 1
+    400460: Bone_end_end 2
+    400462: Bone_end_end 3
+    400464: Bone_end_end 4
     2100000: car
     2100002: Material.001
     2100004: in.t.w
@@ -469,6 +521,32 @@ ModelImporter:
     2100098: C.B.001
     2100100: edeter.000
     2100102: edater.001
+    2100104: nikl.bk.002
+    2100106: car.002
+    2100108: gg.002
+    2100110: nikl.002
+    2100112: in.t.b.002
+    2100114: Material.026
+    2100116: Material.031
+    2100118: in.t.w.002
+    2100120: Material.032
+    2100122: Material.033
+    2100124: Material.023
+    2100126: bk.002
+    2100128: Siges_centre.002
+    2100130: Material.024
+    2100132: Material.030
+    2100134: Material.029
+    2100136: edater.002
+    2100138: Intrieur_&_siges.002
+    2100140: edeter.002
+    2100142: nikel.red.002
+    2100144: Material.027
+    2100146: Material.028
+    2100148: Material.025
+    2100150: C.B.002
+    2100152: miror.002
+    2100154: loha.002
     2300000: Circle.000_Circle.003
     2300002: Circle.001_Circle.002
     2300004: Circle.002_Circle.004
@@ -669,6 +747,9 @@ ModelImporter:
     2300394: Cube.089_Cube.000
     2300396: Cube.091_Cube.000
     2300398: Cube.101_Cube.000
+    2300400: Cube.201_Cube.000
+    2300402: Trunk
+    2300404: Dashboard
     3300000: Circle.000_Circle.003
     3300002: Circle.001_Circle.002
     3300004: Circle.002_Circle.004
@@ -869,6 +950,9 @@ ModelImporter:
     3300394: Cube.089_Cube.000
     3300396: Cube.091_Cube.000
     3300398: Cube.101_Cube.000
+    3300400: Cube.201_Cube.000
+    3300402: Trunk
+    3300404: Dashboard
     4300000: Cube.005_Cube.000
     4300002: Dashboard
     4300004: Cube.165_Cube.221
@@ -1071,11 +1155,30 @@ ModelImporter:
     4300398: Cube.101_Cube.000
     4300400: Cube.089_Cube.000
     4300402: Trunk
+    4300404: Cube.201_Cube.000
+    4300406: Back Right Door
+    4300408: Back Right Door Inside
+    4300410: Back Left Door Inside
+    4300412: Back Left Door
+    4300414: Front Right Door
+    4300416: Front Right Door Inside
+    4300418: Front Left Door Inside
+    4300420: Front Left Door
     9500000: //RootNode
     11100000: //RootNode
     13700000: Dashboard
     13700002: Cube.007_Cube.020
     13700004: Trunk
+    13700006: Cube.201_Cube.261
+    13700008: Cube.003_Cube.002
+    13700010: Back Left Door
+    13700012: Back Left Door Inside
+    13700014: Back Right Door
+    13700016: Back Right Door Inside
+    13700018: Front Left Door
+    13700020: Front Left Door Inside
+    13700022: Front Right Door
+    13700024: Front Right Door Inside
     2186277476908879412: ImportLogs
   externalObjects:
   - first:
@@ -1265,7 +1368,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

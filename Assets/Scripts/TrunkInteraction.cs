@@ -1,4 +1,4 @@
-﻿public class TrunkInteraction : KeyshapeInteraction
+﻿public class TrunkInteraction : BonedInteraction
 {
     public enum State
     {

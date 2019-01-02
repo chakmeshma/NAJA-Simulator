@@ -50,7 +50,7 @@ public class Loader : MonoBehaviour
             Destroy(GameObject.Find("Splash Canvas").gameObject);
         } catch(System.NullReferenceException e)
         {
-
+            e.GetType();
         }
     }
 

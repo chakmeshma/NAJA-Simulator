@@ -1,4 +1,4 @@
-﻿public class DashboardInteraction : KeyshapeInteraction
+﻿public class DashboardInteraction : BonedInteraction
 {
     public enum State
     {
