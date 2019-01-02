@@ -10,6 +10,13 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKey(KeyCode.LeftControl))
+        {
+            Camera.main.fieldOfView = 15f;
+        } else
+            Camera.main.fieldOfView = 60f;
+
+
         if (lastInputBlockingInteraction == null || !lastInputBlockingInteraction.isRunning())
         {
             bool currentSelectedState;
@@ -24,40 +31,39 @@ public class GameController : MonoBehaviour
             {
                 if (Input.GetKeyDown(keyCodes[i]))
                 {
-                    if (interactions != null && i < interactions.Length)
+                    if (interactions != null && i < interactions.Length && interactions[i].interactable)
                     {
-                        if (interactions[i].interactable)
-                        {
-                            try
-                            {
-                                interactions[i].execute();
 
-                                if (interactions[i] is OpenDoorInteraction)
+                        try
+                        {
+                            interactions[i].execute();
+
+                            if (interactions[i] is OpenDoorInteraction)
+                            {
+                                if ((interactions[i] as OpenDoorInteraction).state == OpenDoorInteraction.State.Opened)
                                 {
-                                    if ((interactions[i] as OpenDoorInteraction).state == OpenDoorInteraction.State.Opened)
-                                    {
-                                        interactions[i].gameObject.GetComponent<DoorHullRemoveInteraction>().interactable = true;
-                                    }
-                                    else
-                                    {
-                                        interactions[i].gameObject.GetComponent<DoorHullRemoveInteraction>().interactable = false;
-                                    }
+                                    interactions[i].gameObject.GetComponent<DoorHullRemoveInteraction>().interactable = true;
+                                }
+                                else
+                                {
+                                    interactions[i].gameObject.GetComponent<DoorHullRemoveInteraction>().interactable = false;
                                 }
                             }
-                            catch (System.Exception e)
-                            {
-                                e.GetType();
-                            }
-
-                            if (interactions[i].isInputBlocking())
-                            {
-                                lastInputBlockingInteraction = interactions[i];
-                            }
-                            else
-                            {
-                                lastInputBlockingInteraction = null;
-                            }
                         }
+                        catch (System.Exception e)
+                        {
+                            e.GetType();
+                        }
+
+                        if (interactions[i].isInputBlocking())
+                        {
+                            lastInputBlockingInteraction = interactions[i];
+                        }
+                        else
+                        {
+                            lastInputBlockingInteraction = null;
+                        }
+
                     }
 
                     break;
