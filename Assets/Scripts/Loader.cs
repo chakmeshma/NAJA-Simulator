@@ -17,17 +17,17 @@ public class Loader : MonoBehaviour
     {
         instance = this;
 
-        innerCarInteractionScripts = ReferencesAndValues.instance.innerCar.GetComponentsInChildren<Interaction>();
-        innerCarRenderers = ReferencesAndValues.instance.innerCar.GetComponentsInChildren<Renderer>();
-        innerCarColliders = new List<Collider>(ReferencesAndValues.instance.innerCar.GetComponentsInChildren<Collider>());
+        innerCarInteractionScripts = Data.instance.innerCar.GetComponentsInChildren<Interaction>();
+        innerCarRenderers = Data.instance.innerCar.GetComponentsInChildren<Renderer>();
+        innerCarColliders = new List<Collider>(Data.instance.innerCar.GetComponentsInChildren<Collider>());
 
         innerCarColliders.RemoveAll(item => item.tag != "Interactable");
 
         foreach (Collider i in innerCarColliders)
 
-        outerCarInteractionScripts = ReferencesAndValues.instance.outerCar.GetComponentsInChildren<Interaction>();
-        outerCarRenderers = ReferencesAndValues.instance.outerCar.GetComponentsInChildren<Renderer>();
-        outerCarColliders = new List<Collider>(ReferencesAndValues.instance.outerCar.GetComponentsInChildren<Collider>());
+        outerCarInteractionScripts = Data.instance.outerCar.GetComponentsInChildren<Interaction>();
+        outerCarRenderers = Data.instance.outerCar.GetComponentsInChildren<Renderer>();
+        outerCarColliders = new List<Collider>(Data.instance.outerCar.GetComponentsInChildren<Collider>());
 
         outerCarColliders.RemoveAll(item => item.tag != "Interactable");
     }
@@ -36,9 +36,9 @@ public class Loader : MonoBehaviour
     {
         switchOutdoor();
 
-        ReferencesAndValues.instance.player.GetComponent<CharacterController>().enabled = true;
-        ReferencesAndValues.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
-        ReferencesAndValues.instance.cursorController.cursorImage.enabled = true;
+        Data.instance.player.GetComponent<CharacterController>().enabled = true;
+        Data.instance.player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+        Data.instance.cursor.cursorImage.enabled = true;
     }
 
     void Start()

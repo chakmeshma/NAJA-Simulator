@@ -41,6 +41,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        public bool freezing = false;
 
         // Use this for initialization
         private void Start()
@@ -127,13 +128,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
 
-            if(m_CharacterController.enabled)
+            if (m_CharacterController.enabled)
+            {
                 m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+            }
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
 
-            m_MouseLook.UpdateCursorLock();
+            if (!freezing)
+            {
+                m_MouseLook.UpdateCursorLock();
+            }
         }
 
 
@@ -246,14 +252,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void ForceRotateView(Vector3 rotation)
         {
-            m_MouseLook.ForceLookRotation(transform, m_Camera.transform, rotation);
-            m_MouseLook.LookRotation(transform, m_Camera.transform);
+            if (!freezing)
+            {
+                m_MouseLook.ForceLookRotation(transform, m_Camera.transform, rotation);
+                m_MouseLook.LookRotation(transform, m_Camera.transform);
+            }
 
         }
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation(transform, m_Camera.transform);
+            if (!freezing)
+            {
+                m_MouseLook.LookRotation(transform, m_Camera.transform);
+            }
         }
 
 

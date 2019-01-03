@@ -35,7 +35,7 @@ public abstract class BonedInteraction : Interaction
         StartCoroutine(boneMove(false));
     }
 
-    public void execute(bool reverse)
+    public virtual void execute(bool reverse)
     {
         running = true;
 

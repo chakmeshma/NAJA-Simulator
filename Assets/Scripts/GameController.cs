@@ -1,21 +1,81 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameController : MonoBehaviour
 {
-    public Cursor cursorController;
-    private bool lastSelectedState = false; // breaks when camera is initially positioned so, that the item is selected
-    private Interaction lastInputBlockingInteraction = null;
+    public static GameController instance { get { return _instance; } }
+    private static GameController _instance;
+
+    public GameObject menuContainer;
     public UnityEngine.UI.Text inputHelpText;
     public KeyCode[] keyCodes;
+    private bool lastSelectedState = false; // breaks when camera is initially positioned so, that the item is selected
+    private Interaction lastInputBlockingInteraction = null;
+    private System.Collections.Generic.HashSet<Interaction> foundInteractions = new System.Collections.Generic.HashSet<Interaction>();
+    [SerializeField]
+    private int numObjectives = 2;
+
+    public void found(Interaction interaction)
+    {
+        foundInteractions.Add(interaction);
+
+        updateObjective();
+    }
+
+    private void updateObjective()
+    {
+        if (foundInteractions.Count >= numObjectives)
+            gameOver(true);
+    }
+
+    private bool menuShown
+    {
+        get { return _menuShown; }
+        set { _menuShown = value; updateMenuGame(); }
+    }
+    private bool _menuShown = false;
+
+    public void gameOver(bool win)
+    {
+        Data.instance.inGameMenuItems.Remove(Menu.MenuItem.Resume);
+        Data.instance.menu.populate(Data.instance.inGameMenuItems.Keys.ToList());
+
+        menuShown = true;
+    }
+    public void menuItemAction(Menu.MenuItem item)
+    {
+        switch (item)
+        {
+            case Menu.MenuItem.Resume:
+                menuShown = false;
+                break;
+            case Menu.MenuItem.Again:
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+                break;
+            case Menu.MenuItem.Exit:
+                Application.Quit();
+                break;
+        }
+
+    }
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuShown = !menuShown;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             Camera.main.fieldOfView = 15f;
-        } else
+        }
+        else
+        {
             Camera.main.fieldOfView = 60f;
-
+        }
 
         if (lastInputBlockingInteraction == null || !lastInputBlockingInteraction.isRunning())
         {
@@ -72,7 +132,6 @@ public class GameController : MonoBehaviour
 
         }
     }
-
     private void updateInputGUI(Interaction[] interactions)
     {
         if (interactions == null)
@@ -103,7 +162,6 @@ public class GameController : MonoBehaviour
             inputHelpText.text = ArabicSupport.ArabicFixer.Fix(inputHelpString);
         }
     }
-
     private Interaction[] getInteractions()
     {
         RaycastHit raycastHit;
@@ -117,21 +175,39 @@ public class GameController : MonoBehaviour
 
         return null;
     }
-
     private void updateCursor(ref bool currentSelectedState)
     {
         if (currentSelectedState != lastSelectedState)
         {
             if (currentSelectedState)
             {
-                cursorController.select();
+                Data.instance.cursor.select();
             }
             else
             {
-                cursorController.unselect();
+                Data.instance.cursor.unselect();
             }
         }
 
         lastSelectedState = currentSelectedState;
+    }
+    private void updateMenuGame()
+    {
+        Data.instance.player.GetComponentInChildren<FirstPersonController>().stopping = menuShown;
+        Data.instance.player.GetComponentInChildren<FirstPersonController>().freezing = menuShown;
+        Timer.instance.freezing = menuShown;
+        UnityEngine.Cursor.lockState = (menuShown) ? (CursorLockMode.None) : (CursorLockMode.Locked);
+        UnityEngine.Cursor.visible = menuShown;
+        menuContainer.SetActive(menuShown);
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+
+        Data.instance.menu.populate(Data.instance.inGameMenuItems.Keys.ToList());
+
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 }
