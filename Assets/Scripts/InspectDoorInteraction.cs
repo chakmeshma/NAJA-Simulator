@@ -35,6 +35,8 @@ public class InspectDoorInteraction : Interaction
 
         StopAllCoroutines();
         StartCoroutine(soundPlayRunning());
+
+        checkFound();
     }
 
     private IEnumerator soundPlayRunning()

@@ -16,6 +16,8 @@
         base.execute(state == State.Opened);
 
         state = (state == State.Closed) ? (State.Opened) : (State.Closed);
+
+        checkFound();
     }
 
     public override string getDescription()

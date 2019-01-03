@@ -3,11 +3,20 @@
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    private float time = 20f;
+    private int initialTime = 20;
+    [SerializeField]
+    private float time;
     public UnityEngine.UI.Text timerText;
     public bool stopped = false;
     private bool finished = false;
     public bool freezing = false;
+    public float elapsedTime
+    {
+        get
+        {
+            return ((float)initialTime) - time;
+        }
+    }
 
     public static Timer instance { get { return _instance; } }
     private static Timer _instance;
@@ -15,6 +24,8 @@ public class Timer : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        time = initialTime;
     }
 
     void Update()

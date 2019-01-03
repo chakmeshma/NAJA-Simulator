@@ -18,6 +18,8 @@ public class DoorHullRemoveInteraction : Interaction
         doorHull.SetActive(false);
 
         interactable = false;
+
+        checkFound();
     }
 
     public override string getDescription()

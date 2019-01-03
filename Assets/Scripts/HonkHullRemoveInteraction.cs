@@ -18,6 +18,8 @@ public class HonkHullRemoveInteraction : Interaction
         honkHull.SetActive(false);
 
         interactable = false;
+
+        checkFound();
     }
 
     public override string getDescription()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -10,6 +9,8 @@ public class GameController : MonoBehaviour
 
     public GameObject menuContainer;
     public UnityEngine.UI.Text inputHelpText;
+    public UnityEngine.UI.Text objectiveText;
+    public UnityEngine.UI.Text resultText;
     public KeyCode[] keyCodes;
     private bool lastSelectedState = false; // breaks when camera is initially positioned so, that the item is selected
     private Interaction lastInputBlockingInteraction = null;
@@ -27,7 +28,16 @@ public class GameController : MonoBehaviour
     private void updateObjective()
     {
         if (foundInteractions.Count >= numObjectives)
+        {
             gameOver(true);
+        }
+
+        updateObjectiveUI();
+    }
+
+    private void updateObjectiveUI()
+    {
+        objectiveText.text = ArabicSupport.ArabicFixer.Fix("موارد کشف شده: " + foundInteractions.Count.ToString() + " از " + numObjectives.ToString());
     }
 
     private bool menuShown
@@ -41,6 +51,17 @@ public class GameController : MonoBehaviour
     {
         Data.instance.inGameMenuItems.Remove(Menu.MenuItem.Resume);
         Data.instance.menu.populate(Data.instance.inGameMenuItems.Keys.ToList());
+
+        if (win)
+        {
+            int score = Mathf.RoundToInt(1000.0f / Timer.instance.elapsedTime);
+
+            resultText.text = ArabicSupport.ArabicFixer.Fix("برنده شديد\nامتياز شما: " + score.ToString());
+        }
+        else
+        {
+            resultText.text = ArabicSupport.ArabicFixer.Fix("باختيد");
+        }
 
         menuShown = true;
     }
@@ -59,6 +80,11 @@ public class GameController : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void Start()
+    {
+        updateObjectiveUI();
     }
 
     private void Update()
@@ -210,4 +236,5 @@ public class GameController : MonoBehaviour
         UnityEngine.Cursor.visible = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
+
 }

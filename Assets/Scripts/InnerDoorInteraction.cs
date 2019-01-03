@@ -49,6 +49,8 @@ public class InnerDoorInteraction : Interaction
         enableResetPlayerMovement();
 
         running = false;
+
+        checkFound();
     }
 
     public override string getDescription()

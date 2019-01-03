@@ -58,6 +58,8 @@ public class OuterDoorInteraction : Interaction
         }
 
         running = false;
+
+        checkFound();
     }
 
     public override string getDescription()
