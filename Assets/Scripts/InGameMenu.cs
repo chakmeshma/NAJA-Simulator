@@ -2,18 +2,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Menu : MonoBehaviour
+public class InGameMenu : MonoBehaviour
 {
-    public static Menu instance
+    public static InGameMenu instance
     {
         get
         {
             return _instance;
         }
     }
-    private static Menu _instance;
+    private static InGameMenu _instance;
 
-    public MenuItem selected
+    public ItemMenu selected
     {
         get
         {
@@ -26,19 +26,13 @@ public class Menu : MonoBehaviour
         }
     }
     public Object itemPrefab;
-    public enum MenuItem
-    {
-        Resume,
-        Again,
-        Exit
-    }
     public Color selectedColor;
     public Color unselectedColor;
     private RectTransform rectTransform;
-    private MenuItem _selected = (MenuItem)1000;
+    private ItemMenu _selected = (ItemMenu)1000;
 
     //Populates the menu with the items
-    public void populate(List<MenuItem> menuItems)
+    public void populate(List<ItemMenu> menuItems)
     {
         rectTransform = GetComponent<RectTransform>();
 
@@ -62,13 +56,13 @@ public class Menu : MonoBehaviour
         //Instanting menu item prefabs, setting their text and adjusting UI geometry
         for (int i = 0; i < menuItems.Count; ++i)
         {
-            MenuItem item = menuItems[i];
+            ItemMenu item = menuItems[i];
 
             GameObject newItem = Instantiate(itemPrefab) as GameObject;
 
-            newItem.GetComponentInChildren<MenuItemController>().value = item;
+            newItem.GetComponentInChildren<InGameMenuItemController>().value = item;
 
-            newItem.GetComponentInChildren<UnityEngine.UI.Text>().text = ArabicSupport.ArabicFixer.Fix(Data.instance.inGameMenuItems[item]);
+            newItem.GetComponentInChildren<UnityEngine.UI.Text>().text = ArabicSupport.ArabicFixer.Fix(Data.instance.menuItems[item]);
             RectTransform newItemRectTransform = newItem.GetComponent<RectTransform>();
 
             newItemRectTransform.SetParent(rectTransform);
@@ -100,7 +94,7 @@ public class Menu : MonoBehaviour
     {
         int i = 0;
 
-        foreach (MenuItemController item in GetComponentsInChildren<MenuItemController>())
+        foreach (InGameMenuItemController item in GetComponentsInChildren<InGameMenuItemController>())
         {
             if (item.value == selected)
             {

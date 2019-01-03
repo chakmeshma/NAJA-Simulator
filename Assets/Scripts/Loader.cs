@@ -44,14 +44,6 @@ public class Loader : MonoBehaviour
     void Start()
     {
         applyInitialState();
-
-        try
-        {
-            Destroy(GameObject.Find("Splash Canvas").gameObject);
-        } catch(System.NullReferenceException e)
-        {
-            e.GetType();
-        }
     }
 
     public void switchIndoor()

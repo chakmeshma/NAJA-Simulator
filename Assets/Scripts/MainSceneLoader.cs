@@ -1,38 +1,28 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MainSceneLoader : MonoBehaviour {
+public class MainSceneLoader : MonoBehaviour
+{
     private bool loadingInitiated = false;
-    public GameObject splashLogo;
-    public GameObject loadingGraphics;
+    public GameObject loadingGraphicsCover;
 
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Time.timeSinceLevelLoad > 3.0f && !loadingInitiated)
+    public void load()
+    {
+        if (!loadingInitiated)
         {
             loadingInitiated = true;
 
             Application.backgroundLoadingPriority = ThreadPriority.High;
 
-            DontDestroyOnLoad(splashLogo.transform.parent.gameObject);
-
-            splashLogo.SetActive(false);
-            loadingGraphics.SetActive(true);
+            loadingGraphicsCover.SetActive(true);
 
             StartCoroutine(loadMainScene());
         }
-	}
+    }
 
     IEnumerator loadMainScene()
     {
-        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("main");
+        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Main");
 
         while (!asyncLoad.isDone)
         {

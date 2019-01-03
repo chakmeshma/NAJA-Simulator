@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MenuItemController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class InGameMenuItemController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    public ItemMenu value;
 
-    public Menu.MenuItem value;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -13,11 +13,11 @@ public class MenuItemController : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Menu.instance.selected = value;
+        InGameMenu.instance.selected = value;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Menu.instance.selected = (Menu.MenuItem)1000;
+        InGameMenu.instance.selected = (ItemMenu)1000;
     }
 }

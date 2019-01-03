@@ -16,17 +16,18 @@ public class Data : MonoBehaviour {
     public GameObject outerCar;
     public GameObject innerCar;
     public Cursor cursor;
-    public Menu menu;
-    public Dictionary<Menu.MenuItem, string> inGameMenuItems;
+    public InGameMenu menu;
+    public Dictionary<ItemMenu, string> menuItems;
 
     private void Awake()
     {
         instance = this;
 
-        inGameMenuItems = new Dictionary<Menu.MenuItem, string>();
+        menuItems = new Dictionary<ItemMenu, string>();
 
-        inGameMenuItems[Menu.MenuItem.Resume] = "ادامه";
-        inGameMenuItems[Menu.MenuItem.Again] = "مجدد";
-        inGameMenuItems[Menu.MenuItem.Exit] = "خروج از برنامه";
+        menuItems[ItemMenu.Resume] = "ادامه";
+        menuItems[ItemMenu.Again] = "مجدد";
+        menuItems[ItemMenu.ExitToMainMenu] = "منوی اصلی";
+        menuItems[ItemMenu.Exit] = "خروج از برنامه";
     }
 }

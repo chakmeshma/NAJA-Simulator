@@ -7,7 +7,6 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private float time;
     public UnityEngine.UI.Text timerText;
-    public bool stopped = false;
     private bool finished = false;
     public bool freezing = false;
     public float elapsedTime
