@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController instance { get { return _instance; } }
     private static GameController _instance;
 
+    public bool showEndCredits;
     public GameObject menuContainer;
     public UnityEngine.UI.Text inputHelpText;
     public UnityEngine.UI.Text objectiveText;
@@ -109,7 +110,16 @@ public class GameController : MonoBehaviour
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
                 break;
             case ItemMenu.Exit:
-                Application.Quit();
+                if (showEndCredits)
+                {
+                    GameObject exitMessage = new GameObject("Exit Message");
+                    DontDestroyOnLoad(exitMessage);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("Credits");
+                }
+                else
+                {
+                    Application.Quit();
+                }
                 break;
         }
 
@@ -225,7 +235,7 @@ public class GameController : MonoBehaviour
     {
         RaycastHit raycastHit;
 
-        if (Physics.Raycast(transform.position, transform.forward, out raycastHit, 1.3f, LayerMask.GetMask("Interactable")))
+        if (Physics.Raycast(transform.position, transform.forward, out raycastHit, 1.9f, LayerMask.GetMask("Interactable")))
         {
             Interaction[] interactions = raycastHit.transform.GetComponents<Interaction>();
 

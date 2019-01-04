@@ -3,7 +3,7 @@
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    private int initialTime = 20;
+    private int initialTime = 60;
     [SerializeField]
     private float time;
     public UnityEngine.UI.Text timerText;
